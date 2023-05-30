@@ -1,29 +1,30 @@
 import unittest
-import time
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from webdriver_manager.chrome import ChromeDriverManager
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
 
-class TestLogin(unittest.TestCase):
+class TestLogin(unittest.TestCase): # test scenario
 
     def setUp(self):
         self.browser = webdriver.Chrome(ChromeDriverManager().install())
- 
-def test_a_success_login(self):
-    # steps
-    driver = self.browser #buka web browser
-    driver.get("https://www.saucedemo.com/") # buka situs
-    time.sleep(3)
-    driver.find_element(By.ID,"user-name").send_keys("standard_user") # isi email
-    time.sleep(1)
-    driver.find_element(By.ID,"password").send_keys("secret_sauce") # isi password
-    time.sleep(1)
-    driver.find_element(By.ID, "login-button").click()
-    time.sleep(1)
 
-    # validasi
-    response_data = driver.find_element(By.CLASS_NAME,"title").text
-    self.assertIn('PRODUCTS', response_data)
+    def test_failed_login(self): #test cases 1
+        driver = self.browser
+        driver.implicitly_wait(10)
+        driver.get("https://www.saucedemo.com/")
+        driver.find_element(By.ID, "user-name").send_keys("haitest")
+        driver.find_element(By.NAME, "login-button").click()
+        error_message = driver.find_element(By.CSS_SELECTOR, "[data-test='error']").text
+        self.assertIn("Epic sadface: Password is required", error_message)
 
-def tearDown(self):
-    self.browser.close()
+    def test_success_login(self): #test cases 2
+        driver = self.browser
+        driver.get("https://www.saucedemo.com/")
+        driver.find_element(By.ID, "user-name").send_keys("standard_user")
+        driver.find_element(By.CSS_SELECTOR, "[data-test='password']").send_keys("secret_sauce")
+        driver.find_element(By.NAME, "login-button").click()
+
+if __name__ == '__main__':
+    unittest.main()
