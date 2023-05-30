@@ -13,8 +13,8 @@ class TestLogin(unittest.TestCase): # test scenario
     def test_success_login(self): #test cases 2
         driver = self.browser
         driver.get("https://kasirdemo.belajarqa.com/")
-        driver.find_element(By.ID, "email").send_keys("standard_user")
-        driver.find_element(By.CSS_SELECTOR, "[data-test='password']").send_keys("secret_sauce")
+        driver.find_element(By.ID, "email").send_keys("Task16@sanber.com")
+        driver.find_element(By.ID, "password").send_keys("12345678")
         driver.find_element(By.NAME, "login-button").click()
 
 if __name__ == '__main__':
