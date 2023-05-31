@@ -26,7 +26,10 @@ class Register(unittest.TestCase): # test scenario
         #driver.find_element(By.ID, "signUp").click()
         #driver.find_element(By.ID, "name_register").send_keys("sanber")
         #driver.find_element(By.ID, "email_register").send_keys("sanbercode@test.com")
-        #driver.find_element(By.ID, "signup_register").click()      
+        #driver.find_element(By.ID, "password_register").send_keys("")
+        #driver.find_element(By.ID, "signup_register").click()
+        #error_message = driver.find_element(By.CLASS_NAME, "swal2-title").text
+        #self.assertIn("Oops...", error_message)      
    
 if __name__ == '__main__':
     unittest.main()
